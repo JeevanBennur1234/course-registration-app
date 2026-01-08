@@ -21,11 +21,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // MongoDB Connection with TLS options
-mongoose.connect(MONGODB_URI, {
-  ssl: true,
-  tlsAllowInvalidCertificates: false,
-  tlsAllowInvalidHostnames: false
-})
+mongoose.connect(MONGODB_URI)
 .then(() => {
   console.log('✅ Connected to MongoDB');
   initializeDatabase();
