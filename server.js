@@ -18,10 +18,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // MongoDB Connection
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(MONGODB_URI)
 .then(() => {
   console.log('✅ Connected to MongoDB');
   initializeDatabase();
