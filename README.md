@@ -1,6 +1,6 @@
 # Course Registration Web App
 
-A modern, responsive course registration system built with Node.js, Express, and vanilla JavaScript. Features a beautiful dark-themed UI with smooth animations and real-time updates.
+A modern, responsive course registration system built with Node.js, Express, MongoDB, and vanilla JavaScript. Features a beautiful dark-themed UI with smooth animations and real-time updates.
 
 ## Features
 
@@ -9,14 +9,22 @@ A modern, responsive course registration system built with Node.js, Express, and
 - 👤 **Student Dashboard**: View and manage your registered courses
 - 🎨 **Modern UI**: Beautiful dark theme with gradients and smooth animations
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- 💾 **Data Persistence**: JSON-based storage for courses and registrations
+- 💾 **MongoDB Database**: Persistent data storage with MongoDB Atlas or local MongoDB
+- 🔒 **Data Validation**: Mongoose schema validation for data integrity
 
 ## Tech Stack
 
 - **Backend**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose ODM
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Storage**: JSON file-based database
 - **Styling**: Custom CSS with modern design patterns
+- **Deployment**: Render + MongoDB Atlas
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB (Local installation OR MongoDB Atlas account - free)
+- Git
 
 ## Installation
 
@@ -31,7 +39,28 @@ A modern, responsive course registration system built with Node.js, Express, and
    npm install
    ```
 
-3. **Start the server**
+3. **Set up MongoDB**
+   
+   **Option A: MongoDB Atlas (Recommended for deployment)**
+   - Follow the detailed guide in [MONGODB_SETUP.md](MONGODB_SETUP.md)
+   - Get your free MongoDB Atlas connection string
+   - Create `.env` file:
+     ```env
+     PORT=3000
+     MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/course-registration?retryWrites=true&w=majority
+     NODE_ENV=development
+     ```
+   
+   **Option B: Local MongoDB**
+   - Install MongoDB locally (see [MONGODB_SETUP.md](MONGODB_SETUP.md))
+   - Create `.env` file:
+     ```env
+     PORT=3000
+     MONGODB_URI=mongodb://localhost:27017/course-registration
+     NODE_ENV=development
+     ```
+
+4. **Start the server**
    ```bash
    npm start
    ```
@@ -85,22 +114,23 @@ The app will be available at: `https://your-app-name.onrender.com`
 
 ```
 course-registration-app/
+├── models/
+│   ├── Course.js          # Mongoose Course model
+│   └── Registration.js    # Mongoose Registration model
 ├── public/
-│   ├── index.html      # Main HTML file
-│   ├── styles.css      # Styling
-│   └── script.js       # Frontend JavaScript
-├── data/               # JSON data storage (auto-generated)
-│   ├── courses.json
-│   └── registrations.json
-├── server.js           # Express server
-├── package.json        # Dependencies
-├── .gitignore         # Git ignore rules
-└── README.md          # This file
+│   ├── index.html         # Main HTML file
+│   ├── styles.css         # Styling
+│   └── script.js          # Frontend JavaScript
+├── server.js              # Express server with MongoDB
+├── package.json           # Dependencies
+├── .env                   # Environment variables (create this)
+├── .env.example          # Environment variables template
+├── .gitignore            # Git ignore rules
+├── README.md             # This file
+├── MONGODB_SETUP.md      # MongoDB setup guide
+├── DEPLOYMENT.md         # Deployment guide
+└── QUICKSTART.md         # Quick reference
 ```
-
-## Features in Detail
-
-### Course Browsing
 - View all available courses in a responsive grid layout
 - See course details including instructor, schedule, credits, and capacity
 - Real-time availability indicators
